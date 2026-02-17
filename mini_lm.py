@@ -40,3 +40,19 @@ for w in words:
     ix2 = stoi[ch2]
     N[ix1, ix2] += 1
 
+itos = {i:s for s,i in stoi.items()}
+
+# visualize the bigram
+import matplotlib.pyplot as plt
+# %matplotlib inline
+plt.figure(figsize=(16,16))
+plt.imshow(N, cmap='Reds')
+
+for i in range(28):
+  for j in range(28):
+    chstr = itos[i] + itos[j]
+    plt.text(j, i, chstr, ha='center', va='bottom', color='gray')
+    plt.text(j, i, N[j, i].item(), ha='center', va='top', color='gray')
+    
+plt.axis('off')
+plt.show()
