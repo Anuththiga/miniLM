@@ -54,3 +54,23 @@ for i in range(27):
     plt.text(j, i, N[i, j].item(), ha='center', va='top', color='gray')
 plt.axis('off')
 plt.show()
+
+# sampling the first character of the word
+N[0]
+
+# convert to probability distribution
+p = N[0].float() # to normalize the count
+p = p / p.sum()
+p
+
+g = torch.Generator().manual_seed(2147483647)
+ix = torch.multinomial(p, num_samples=1, replacement=True, generator=g).item()
+print(itos[ix])
+
+# sample from distribution
+g = torch.Generator().manual_seed(2147483647)
+p = torch.rand(3, generator=g)
+p = p / p.sum()
+print(p)
+
+torch.multinomial(p, num_samples=20, replacement=True, generator=g)
