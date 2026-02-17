@@ -13,6 +13,13 @@ print(max(len(w) for w in words))
 # shortes word
 print(min(len(w) for w in words))
 
-for w in words[:2]:
-  for ch1, ch2 in zip(w, w[1:]):
-    print(ch1, ch2)
+# bigram implementation
+c = {}
+for w in words:
+  chs = ['<S>'] + list(w) + ['<E>']
+  for ch1, ch2 in zip(chs, chs[1:]):
+    bigram = (ch1, ch2)
+    c[bigram] = c.get(bigram, 0) + 1
+
+# sorting the key value
+sorted(c.items(), key = lambda kv: -kv[1])
